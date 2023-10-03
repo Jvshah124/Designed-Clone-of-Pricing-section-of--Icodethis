@@ -20,9 +20,13 @@
   color: #ffffff;
 }
 
+.plans p {
+  color: #f1f1f1;
+  font-size: 1.1rem;
+}
+
 .pricing {
   margin: 64px 0;
-  border: 2px solid rgb(236, 232, 232);
   width: 100%;
   height: auto;
   display: flex;
@@ -33,16 +37,107 @@
 }
 
 .cards {
-  /* border: 2px solid blueviolet; */
-  box-shadow: 1px -1px 7px #fff;
+  position: relative;
+  border: 3px solid transparent;
+  overflow: hidden;
+  /* box-shadow: 1px -1px 7px #fff; */
   border-radius: 11px;
   width: 390px;
   height: 630px;
   padding: 28px;
   background-color: #181028;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* ---------Animation (Basic)---------- */
+.basic {
+  animation: basicFlow 5s linear infinite;
+}
+
+.basic:hover {
+  box-shadow: 0 0 20px #5b19d5;
+}
+@keyframes basicFlow {
+  0% {
+    border-image-source: linear-gradient(to right, transparent, #5c33a8);
+    border-image-slice: 1;
+  }
+  100% {
+    border-image-source: linear-gradient(to right, #5c33a8, transparent);
+    border-image-slice: 1;
+  }
+}
+
+/* ----------(Animation Gold)---------------- */
+.gold {
+  animation: goldFlow 5s linear infinite;
+}
+
+.gold:hover {
+  box-shadow: 0 0 20px #eab308;
+}
+
+@keyframes goldFlow {
+  0% {
+    border-image-source: linear-gradient(to right, transparent, #856810);
+    border-image-slice: 1;
+  }
+  100% {
+    border-image-source: linear-gradient(to right, #856810, transparent);
+    border-image-slice: 1;
+  }
+}
+
+/* ----------Animaton(Platinum)---------- */
 .platinum {
+  animation: platinumFlow 5s linear infinite;
+}
+
+.platinum:hover {
+  box-shadow: 0 0 20px #3b82f6;
+}
+
+@keyframes platinumFlow {
+  0% {
+    border-image-source: linear-gradient(to right, transparent, #0d326c);
+    border-image-slice: 1;
+  }
+  100% {
+    border-image-source: linear-gradient(to right, #3b82f6, transparent);
+    border-image-slice: 1;
+  }
+}
+
+/* -----------Animation .cards ----------- */
+.cards::before {
+  content: "";
+  position: absolute;
+  top: 27%;
+  left: 0;
+  width: 95%;
+  height: 12%;
+  z-index: -1;
+  background: radial-gradient(
+    circle,
+    rgba(113, 106, 113, 0.314),
+    transparent
+  ); /* Circular gradient for glow effect */
+  transform-origin: center;
+  transform: scale(0);
+  transition: transform 1s ease; /* Transition for glow effect */
+}
+
+.cards:hover {
+  transform: scale(1.02); /* Enlarge the card on hover */
+  /* Add a subtle shadow on hover */
+}
+
+.cards:hover::before {
+  transform: scale(1.5); /* Enlarge the glow effect on hover */
+}
+*/ .platinum {
   height: 530px;
+  background-color: #6d2067;
 }
 
 .mainn-text {
@@ -76,15 +171,39 @@
   background-color: transparent;
 }
 
+.price {
+  position: relative;
+  padding-top: 3px;
+}
 .price strong {
+  padding-right: 1rem;
+}
+.basic .price strong {
   color: #f1f5f9;
   font-size: 3rem;
   margin-top: 2rem;
+  color: #5b19d5;
+}
+
+.gold .price strong {
+  color: #f1f5f9;
+  font-size: 3rem;
+  margin-top: 2rem;
+  color: #eab308;
+}
+
+.platinum .price strong {
+  color: #f1f5f9;
+  font-size: 3rem;
+  margin-top: 2rem;
+  color: #3b82f6;
 }
 
 .price > span {
   color: #cfcafb;
-  font-size: 1.87rem;
+  font-size: 1.57rem;
+  position: absolute;
+  text-decoration: line-through;
 }
 
 .cards .unlock {
@@ -107,8 +226,8 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  animation: clickAnimation 2s linear infinite;
-  transition: all 0.3s ease-in;
+  animation: clickAnimation 4s linear infinite;
+  transition: all 0.3s ease-in-out;
 }
 
 .cards button:hover {
